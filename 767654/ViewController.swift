@@ -31,14 +31,19 @@ class ViewController: UIViewController {
         
         switch button {
         case 1: url = URL(string: "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcSgc_VD_ytllzp_DzqeYPS0CAFxGjwFpYKw_4ngm7q8SZqJJK_r")
-        case 2: url = URL(string: "http://www.threepullpa.com/data/uploads/36/405317-images-of-nature-amazing-place.jpg")
+        case 2: url = URL(string: "https://pp.userapi.com/c629102/v629102365/21551/1Xp2ww1jQJg.jpg")
         case 3: url = URL(string: "http://wallpaperpulse.com/img/1010484.jpg")
         default: break
         }
+        DispatchQueue.global(qos: .userInteractive).async {
+            let fetch = NSData(contentsOf: url! as URL)
+            if let dataImage = fetch {
+                DispatchQueue.main.async {
+                    self.myImage.image = UIImage(data: dataImage as Data)
+                }
+                
+        }
         
-        let fetch = NSData(contentsOf: url! as URL)
-        if let dataImage = fetch {
-            self.myImage.image = UIImage(data: dataImage as Data)
         }
     }
     
